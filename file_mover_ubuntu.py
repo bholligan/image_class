@@ -38,7 +38,7 @@ img_files = []
 for folder in img_folders:
     img_files += glob(folder + "/*")
 
-base_dst = "/home/ubuntu/data/"
+base_dst = "/ebs/user05/data/"
 for img_file in img_files:
     picfile = os.path.basename(img_file)
     if picfile in fash_files_train.values:
