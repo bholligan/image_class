@@ -11,9 +11,7 @@ from keras.layers import Activation, Dropout, Flatten, Dense, Input
 from keras.utils.data_utils import get_file
 import os
 import h5py
-
-# img dimensions
-img_width, img_height = 224, 224
+from __future__ import print_function
 
 # path to the model weights file.
 weights_file = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg19_weights_th_dim_ordering_th_kernels_notop.h5'
@@ -22,13 +20,16 @@ weights_path = get_file('vgg19_weights_th_dim_ordering_th_kernels_notop.h5',
                                         weights_file,
                                         cache_subdir='models')
 
-train_data_dir = "/ebs/user05/data/train"
-test_data_dir = "/ebs/user05/data/test"
-nb_train_samples = 20528
-nb_validation_samples = 11545
-nb_epoch = 50
+def save_bottleneck_features(weights_path = weights_path):
+    # img dimensions
+    img_width, img_height = 224, 224
 
-def save_bottleneck_features():
+    train_data_dir = "/ebs/user05/data/train"
+    test_data_dir = "/ebs/user05/data/test"
+    nb_train_samples = 20528
+    nb_validation_samples = 11545
+    nb_epoch = 50
+
     # Look into subtracting out the mean pixel value instead of rescaling
     datagen = image.ImageDataGenerator(rescale=1./255)
 
@@ -68,6 +69,7 @@ def save_bottleneck_features():
 
     model.load_weights(weights_path)
 
+    print("Model Loaded. Getting train data...")
     generator = datagen.flow_from_directory(
             train_data_dir,
             target_size=(img_width, img_height),
@@ -77,6 +79,7 @@ def save_bottleneck_features():
     bottleneck_features_train = model.predict_generator(generator, nb_train_samples)
     np.save(open('bottleneck_features_train.npy', 'w'), bottleneck_features_train)
 
+    print("Getting test data...")
     generator = datagen.flow_from_directory(
             validation_data_dir,
             target_size=(img_width, img_height),
