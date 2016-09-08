@@ -28,7 +28,7 @@ nb_train_samples = 20528
 nb_validation_samples = 11545
 nb_epoch = 50
 
-def save_bottleneck_features(weights_path = weights_path):
+def save_bottleneck_features():
     # Look into subtracting out the mean pixel value instead of rescaling
     datagen = image.ImageDataGenerator(rescale=1./255)
 
@@ -85,3 +85,5 @@ def save_bottleneck_features(weights_path = weights_path):
             shuffle=False)
     bottleneck_features_validation = model.predict_generator(generator, nb_validation_samples)
     np.save(open('bottleneck_features_validation.npy', 'w'), bottleneck_features_validation)
+
+save_bottleneck_features()
