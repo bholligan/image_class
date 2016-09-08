@@ -16,7 +16,7 @@ count = 0
 for file in files:
     try:
         image.load_img(file)
-    except OSError:
+    except IOError:
         count += 1
         os.remove(file)
 print "Files Removed", count
