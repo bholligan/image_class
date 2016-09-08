@@ -1,3 +1,4 @@
+from __future__ import print_function
 from keras.preprocessing import image
 import numpy as np
 from keras.applications import imagenet_utils
@@ -11,7 +12,7 @@ from keras.layers import Activation, Dropout, Flatten, Dense, Input
 from keras.utils.data_utils import get_file
 import os
 import h5py
-from __future__ import print_function
+
 
 # path to the model weights file.
 weights_file = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg19_weights_th_dim_ordering_th_kernels_notop.h5'
