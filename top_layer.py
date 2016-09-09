@@ -27,8 +27,8 @@ def save_bottleneck_features(weights_path = weights_path):
 
     train_data_dir = "/ebs/user05/data/train"
     test_data_dir = "/ebs/user05/data/test"
-    nb_train_samples = 20528
-    nb_validation_samples = 11545
+    nb_train_samples = 20523
+    nb_validation_samples = 11550
     nb_epoch = 50
 
     # Look into subtracting out the mean pixel value instead of rescaling
