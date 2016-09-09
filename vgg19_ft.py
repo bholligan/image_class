@@ -23,10 +23,10 @@ nb_validation_samples = 11550
 
 base_model = VGG19(include_top=False, weights = 'imagenet')
 x = base_model.output
-x = GlobalAveragePooling2D()(x)
-x = Dense(512, activation='relu')(x)
+x = Flatten(name='flatten')(x)
+x = Dense(512, activation='relu', name='fc1')(x)
 x = Dropout(0.5)(x)
-predictions = Dense(1, activation = 'sigmoid')(x)
+predictions = Dense(1, activation = 'sigmoid', name = 'predicts')(x)
 model = Model(input= base_model.input, output = predictions)
 
 # Load some top model weights?
