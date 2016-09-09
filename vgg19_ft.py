@@ -23,10 +23,8 @@ nb_validation_samples = 11550
 
 base_model = VGG19(include_top=False, weights = 'imagenet')
 x = base_model.output
-# Check whether this is the equivalent to flatten
-x = GlobalMaxPooling2D()(x)
+x = Flatten()(x)
 x = Dense(256, activation='relu', name='fc1')(x)
-# Possibly remove dropout
 x = Dropout(0.5)(x)
 predictions = Dense(1, activation = 'sigmoid', name = 'predicts')(x)
 model = Model(input= base_model.input, output = predictions)
