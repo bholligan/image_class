@@ -26,7 +26,7 @@ def save_bottleneck_features(weights_path = weights_path):
     img_width, img_height = 224, 224
 
     train_data_dir = "/ebs/user05/data/train"
-    test_data_dir = "/ebs/user05/data/test"
+    validation_data_dir = "/ebs/user05/data/test"
     nb_train_samples = 20523
     nb_validation_samples = 11550
     nb_epoch = 50
@@ -70,15 +70,15 @@ def save_bottleneck_features(weights_path = weights_path):
 
     model.load_weights(weights_path)
 
-    print("Model Loaded. Getting train data...")
-    generator = datagen.flow_from_directory(
-            train_data_dir,
-            target_size=(img_width, img_height),
-            batch_size=32,
-            class_mode=None,
-            shuffle=False)
-    bottleneck_features_train = model.predict_generator(generator, nb_train_samples)
-    np.save(open('bottleneck_features_train.npy', 'w'), bottleneck_features_train)
+    # print("Model Loaded. Getting train data...")
+    # generator = datagen.flow_from_directory(
+    #         train_data_dir,
+    #         target_size=(img_width, img_height),
+    #         batch_size=32,
+    #         class_mode=None,
+    #         shuffle=False)
+    # bottleneck_features_train = model.predict_generator(generator, nb_train_samples)
+    # np.save(open('bottleneck_features_train.npy', 'w'), bottleneck_features_train)
 
     print("Getting test data...")
     generator = datagen.flow_from_directory(
