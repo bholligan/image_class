@@ -2,8 +2,11 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.layers import Activation, Dropout, Flatten, Dense, Input
+from keras import optimizers
 
 def train_top_model():
+    top_model_weights_path = 'bottleneck_fc_model.h5'
+
     nb_epoch = 50
     train_data = np.load(open('bottleneck_features_train.npy'))
     train_labels = np.array([1] * (12901) + [0] * (7622)) #local is 7627
@@ -17,7 +20,7 @@ def train_top_model():
     model.add(Dropout(0.5))
     model.add(Dense(1, activation='sigmoid'))
 
-    model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=optimizers.RMSprop(lr = .000001), loss='binary_crossentropy', metrics=['accuracy'])
 
     model.fit(train_data, train_labels,
               nb_epoch=nb_epoch, batch_size=32,
