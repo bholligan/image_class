@@ -24,7 +24,7 @@ base_model = VGG19(include_top=False, weights = 'imagenet')
 x = base_model.output
 x = Flatten()(x)
 x = Dense(1024, activation='relu', name='fc1')(x)
-predictions = Dense(6, activation = 'softmax', name = 'predicts')(x)
+predictions = Dense(5, activation = 'softmax', name = 'predicts')(x)
 model = Model(input= base_model.input, output = predictions)
 
 # Load some top model weights?
