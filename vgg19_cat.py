@@ -17,8 +17,8 @@ train_data_dir = "/ebs/categories/train"
 validation_data_dir = "/ebs/categories/test"
 img_width, img_height = 224, 224
 nb_epoch = 30
-nb_train_samples = 1723
-nb_validation_samples = 600
+nb_train_samples = 1430
+nb_validation_samples = 500
 
 base_model = VGG19(include_top=False, weights = 'imagenet')
 x = base_model.output
