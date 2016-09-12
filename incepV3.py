@@ -9,8 +9,8 @@ train_data_dir = "/ebs/categories/train"
 validation_data_dir = "/ebs/categories/test"
 img_width, img_height = 224, 224
 nb_epoch = 30
-nb_train_samples = 1430
-nb_validation_samples = 500
+nb_train_samples = 1723
+nb_validation_samples = 600
 
 # create the base pre-trained model
 base_model = InceptionV3(weights='imagenet', include_top=False)
@@ -20,7 +20,7 @@ x = base_model.output
 x = GlobalAveragePooling2D()(x)
 # add a fully-connected layer
 x = Dense(1024, activation='relu', name='fc_1')(x)
-predictions = Dense(5, activation='softmax')(x)
+predictions = Dense(6, activation='softmax')(x)
 
 model = Model(input=base_model.input, output=predictions)
 
