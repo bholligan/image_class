@@ -20,7 +20,7 @@ x = base_model.output
 x = GlobalAveragePooling2D()(x)
 # add a fully-connected layer
 x = Dense(1024, activation='relu', name='fc_1')(x)
-predictions = Dense(6, activation='softamx')(x)
+predictions = Dense(6, activation='softmax')(x)
 
 model = Model(input=base_model.input, output=predictions)
 
