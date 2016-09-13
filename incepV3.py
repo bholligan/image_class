@@ -3,7 +3,7 @@ from keras.preprocessing import image
 from keras.models import Model
 from keras.layers import Dense, GlobalAveragePooling2D
 from keras import backend as K
-from keras import optimizers
+from keras.optimizers import SGD, RMSprop
 
 train_data_dir = "/ebs/categories/train"
 validation_data_dir = "/ebs/categories/test"
@@ -28,7 +28,7 @@ model = Model(input=base_model.input, output=predictions)
 for layer in base_model.layers:
     layer.trainable = False
 
-model.compile(optimizer=optimizers.RMSprop(lr = .00001), loss = 'categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=RMSprop(lr = .00001), loss = 'categorical_crossentropy', metrics=['accuracy'])
 
 train_datagen = image.ImageDataGenerator(rescale = 1./255,
                                   shear_range =.2,
@@ -52,31 +52,30 @@ generator_test = test_datagen.flow_from_directory(
 
 model.fit_generator(generator_train,
             samples_per_epoch = nb_train_samples,
-            nb_epoch=nb_epoch,
-            validation_data=generator_test,
+            nb_epoch = nb_epoch,
+            validation_data = generator_test,
             nb_val_samples = nb_validation_samples)
 
-# at this point, the top layers are well trained and we can start fine-tuning
-# convolutional layers from inception V3. We will freeze the bottom N layers
-# and train the remaining top layers.
+#start fine-tuning
+# train the top 2 inception blocks
+for layer in model.layers[:172]:
+   layer.trainable = False
+for layer in model.layers[172:]:
+   layer.trainable = True
 
-# let's visualize layer names and layer indices to see how many layers
-# we should freeze:
-# for i, layer in enumerate(base_model.layers):
-#    print(i, layer.name)
-#
-# # we chose to train the top 2 inception blocks, i.e. we will freeze
-# # the first 172 layers and unfreeze the rest:
-# for layer in model.layers[:172]:
-#    layer.trainable = False
-# for layer in model.layers[172:]:
-#    layer.trainable = True
+# use SGD with a low learning rate
+model.compile(optimizer=SGD(lr=0.0001, momentum=0.9),
+            loss='categorical_crossentropy')
 
-# # we need to recompile the model for these modifications to take effect
-# # we use SGD with a low learning rate
-# from keras.optimizers import SGD
-# model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy')
-#
 # # we train our model again (this time fine-tuning the top 2 inception blocks
 # # alongside the top Dense layers
-# model.fit_generator(...)
+model.fit_generator(generator_train,
+            samples_per_epoch = nb_train_samples,
+            nb_epoch = nb_epoch,
+            validation_data = generator_test,
+            nb_val_samples = nb_validation_samples)
+
+model_json = model.to_json()
+with open("incep.json", 'w') as json_file:
+    json_file.write(model_json)
+model.save_weights("incep.h5")

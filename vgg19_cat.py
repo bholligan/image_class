@@ -28,8 +28,6 @@ x = Dropout(0.5)(x)
 predictions = Dense(6, activation = 'softmax', name = 'predicts')(x)
 model = Model(input= base_model.input, output = predictions)
 
-# Load some top model weights?
-
 for layer in base_model.layers:
     layer.trainable = False
 
