@@ -1,3 +1,4 @@
+from __future__ import print_function
 import pandas as pd
 import numpy as np
 import re
@@ -43,22 +44,27 @@ for folder in img_folders:
     img_files += glob(folder + "/*")
 
 base_dst = "/ebs/user05/data/"
-count = 0
+c1, c2, c3, c4 = 0, 0, 0, 0
 for img_file in img_files:
-    try: 
-        Image.open(img_file)
-        picfile = os.path.basename(img_file)
-        if picfile in fash1_files_train.values:
-            shutil.copy(img_file, base_dst + "train/fashion/" + picfile)
-        elif picfile in fash1_files_test.values:
-            shutil.copy(img_file, base_dst + "test/fashion/" + picfile)
-        elif picfile in other_files_train.values:
-            shutil.copy(img_file, base_dst + "train/not_fashion/" + picfile)
-        elif picfile in other_files_test.values:
-            shutil.copy(img_file, base_dst + "test/not_fashion/" + picfile)
-        else:
-            pass
-    except IOError:
-        count += 1
-        os.remove(img_file)
-print "Files Removed", count
+    # try:
+    #     Image.open(img_file)
+    picfile = os.path.basename(img_file)
+    if picfile in fash1_files_train.values:
+        shutil.copy(img_file, base_dst + "train/fash1/" + picfile)
+        c1 += 1
+    elif picfile in fash1_files_test.values:
+        shutil.copy(img_file, base_dst + "test/fash1/" + picfile)
+        c2 += 1
+    elif picfile in other_files_train.values:
+        shutil.copy(img_file, base_dst + "train/other/" + picfile)
+        c3 += 1
+    elif picfile in other_files_test.values:
+        shutil.copy(img_file, base_dst + "test/other/" + picfile)
+        c4 += 1
+    else:
+        pass
+#     except IOError:
+#         count += 1
+#         os.remove(img_file)
+# print "Files Removed", count
+print("train fash1: {}\ntrain other: {}\ntest fash1: {}\ntest other: {}".format(c1,c3,c2,c4))
