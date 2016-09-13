@@ -24,6 +24,7 @@ base_model = VGG19(include_top=False, weights = 'imagenet')
 x = base_model.output
 x = Flatten()(x)
 x = Dense(1024, activation='relu', name='fc1')(x)
+x = Dropout(0.5)(x)
 predictions = Dense(6, activation = 'softmax', name = 'predicts')(x)
 model = Model(input= base_model.input, output = predictions)
 
@@ -59,3 +60,8 @@ model.fit_generator(generator_train,
             nb_epoch=nb_epoch,
             validation_data=generator_test,
             nb_val_samples = nb_validation_samples)
+
+model_json = model.to_json()
+with open("vgg19.json", 'w') as json_file:
+    json_file.write(model_json)
+model.save_weights("vgg19.h5")
