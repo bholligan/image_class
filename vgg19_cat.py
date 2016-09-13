@@ -6,7 +6,7 @@ from keras.applications import imagenet_utils
 import json
 from keras.applications.imagenet_utils import *
 import pandas as pd
-from keras import optimizers
+from keras.optimizers import SGD, RMSprop
 from keras.models import Sequential
 from keras.layers import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.layers import GlobalMaxPooling2D
@@ -31,7 +31,7 @@ model = Model(input= base_model.input, output = predictions)
 for layer in base_model.layers:
     layer.trainable = False
 
-model.compile(optimizer=optimizers.RMSprop(lr = .00001),
+model.compile(optimizer=RMSprop(lr = .00001),
             loss='categorical_crossentropy', metrics=['accuracy'])
 
 train_datagen = image.ImageDataGenerator(rescale = 1./255,
@@ -57,6 +57,20 @@ model.fit_generator(generator_train,
             samples_per_epoch = nb_train_samples,
             nb_epoch=nb_epoch,
             validation_data=generator_test,
+            nb_val_samples = nb_validation_samples)
+
+for layer in model.layers[:17]:
+   layer.trainable = False
+for layer in model.layers[17:]:
+   layer.trainable = True
+
+model.compile(optimizer=SGD(lr=0.0001, momentum=0.9),
+            loss='categorical_crossentropy', metrics=['accuracy'])
+
+model.fit_generator(generator_train,
+            samples_per_epoch = nb_train_samples,
+            nb_epoch = nb_epoch,
+            validation_data = generator_test,
             nb_val_samples = nb_validation_samples)
 
 model_json = model.to_json()
