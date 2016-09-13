@@ -17,10 +17,9 @@ def pic_num(text):
     return re.search(r'.com/\w+/(\d+)_', text).group(1) + '.jpg'
 
 df['Filename'] = df.PictureURL.apply(pic_num)
-fash1 = df[(df['Majority Q1'] == 'yes') & (df['Majority Q4'] ==
-                                     'onepeople')].Filename
+fash1 = df[(df['Majority Q1'] == 'yes') & (df['Majority Q3'] == 'onepeople')].Filename
 
-other = df[df['Majority Q4'] != 'onepeople'].Filename
+other = df[df['Majority Q3'] != 'onepeople'].Filename
 
 np.random.shuffle(fash1.values)
 np.random.shuffle(other.values)
