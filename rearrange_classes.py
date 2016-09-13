@@ -45,7 +45,8 @@ for folder in img_folders:
 base_dst = "/ebs/user05/data/"
 count = 0
 for img_file in img_files:
-    try Image.open(img_file):
+    try: 
+        Image.open(img_file)
         picfile = os.path.basename(img_file)
         if picfile in fash1_files_train.values:
             shutil.copy(img_file, base_dst + "train/fashion/" + picfile)
