@@ -65,7 +65,7 @@ for layer in model.layers[172:]:
 
 # use SGD with a low learning rate
 model.compile(optimizer=SGD(lr=0.0001, momentum=0.9),
-            loss='categorical_crossentropy')
+            loss='categorical_crossentropy', metrics=['accuracy'])
 
 # # we train our model again (this time fine-tuning the top 2 inception blocks
 # # alongside the top Dense layers
