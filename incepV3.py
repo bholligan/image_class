@@ -28,7 +28,7 @@ model = Model(input=base_model.input, output=predictions)
 for layer in base_model.layers:
     layer.trainable = False
 
-model.compile(optimizer=RMSprop(lr = .00001), loss = 'categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=SGD(lr = .00001), loss = 'categorical_crossentropy', metrics=['accuracy'])
 
 train_datagen = image.ImageDataGenerator(rescale = 1./255,
                                   shear_range =.2,
@@ -76,6 +76,6 @@ model.fit_generator(generator_train,
             nb_val_samples = nb_validation_samples)
 
 model_json = model.to_json()
-with open("incep.json", 'w') as json_file:
+with open("incep.json2", 'w') as json_file:
     json_file.write(model_json)
-model.save_weights("incep.h5")
+model.save_weights("incep2.h5")
