@@ -8,7 +8,7 @@ from keras.optimizers import SGD, RMSprop
 train_data_dir = "/ebs/user05/data/train"
 validation_data_dir = "/ebs/user05/data/test"
 img_width, img_height = 299, 299
-nb_epoch = 30
+nb_epoch = 20
 nb_train_samples = 20385
 nb_validation_samples = 8733
 
