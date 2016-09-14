@@ -24,7 +24,7 @@ generator = datagen.flow_from_directory(
         class_mode=None,
         shuffle=False)
 bottleneck_features_train = base_model.predict_generator(generator, nb_train_samples)
-np.save(open('incep_bottleneck_features_train.npy', 'w'), bottleneck_features_train)
+np.save(open('/ebs/incep_bottleneck_features_train.npy', 'w'), bottleneck_features_train)
 
 generator = datagen.flow_from_directory(
         validation_data_dir,
@@ -33,4 +33,4 @@ generator = datagen.flow_from_directory(
         class_mode=None,
         shuffle=False)
 bottleneck_features_validation = base_model.predict_generator(generator, nb_validation_samples)
-np.save(open('incep_bottleneck_features_validation.npy', 'w'), bottleneck_features_validation)
+np.save(open('/ebs/incep_bottleneck_features_validation.npy', 'w'), bottleneck_features_validation)
