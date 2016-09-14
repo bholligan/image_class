@@ -1,4 +1,5 @@
 from keras.applications.inception_v3 import InceptionV3
+import numpy as np
 from keras.preprocessing import image
 from keras.models import Model
 from keras.layers import Dense, GlobalAveragePooling2D
