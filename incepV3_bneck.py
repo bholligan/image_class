@@ -17,20 +17,20 @@ base_model = InceptionV3(weights='imagenet', include_top=False)
 
 datagen = image.ImageDataGenerator(rescale=1./255)
 
-# generator = datagen.flow_from_directory(
-#         train_data_dir,
-#         target_size=(img_width, img_height),
-#         batch_size=32,
-#         class_mode=None,
-#         shuffle=False)
-# bottleneck_features_train = base_model.predict_generator(generator, nb_train_samples)
-# np.save(open('/ebs/incep_bottleneck_features_train.npy', 'w'), bottleneck_features_train)
-
 generator = datagen.flow_from_directory(
-        validation_data_dir,
+        train_data_dir,
         target_size=(img_width, img_height),
         batch_size=2,
         class_mode=None,
         shuffle=False)
-bottleneck_features_validation = base_model.predict_generator(generator, nb_validation_samples)
-np.save(open('/ebs/incep_bottleneck_features_validation.npy', 'w'), bottleneck_features_validation)
+bottleneck_features_train = base_model.predict_generator(generator, nb_train_samples)
+np.save(open('/ebs/incep_bottleneck_features_train.npy', 'w'), bottleneck_features_train)
+
+# generator = datagen.flow_from_directory(
+#         validation_data_dir,
+#         target_size=(img_width, img_height),
+#         batch_size=2,
+#         class_mode=None,
+#         shuffle=False)
+# bottleneck_features_validation = base_model.predict_generator(generator, nb_validation_samples)
+# np.save(open('/ebs/incep_bottleneck_features_validation.npy', 'w'), bottleneck_features_validation)
