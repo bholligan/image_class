@@ -8,10 +8,10 @@ import numpy as np
 top_model_weights_path = 'incep_bottleneck_fc_model.h5'
 
 nb_epoch = 50
-train_data = np.load(open('incep_bottleneck_features_train.npy'))
+train_data = np.load(open('/ebs/incep_bottleneck_features_train.npy'))
 train_labels = np.array([1] * (5893) + [0] * (14492))
 
-validation_data = np.load(open('incep_bottleneck_features_validation.npy'))
+validation_data = np.load(open('/ebs/incep_bottleneck_features_validation.npy'))
 validation_labels = np.array([1] * (2523) + [0] * (6210))
 
 inputs = Input(shape=(2048,8,8))
@@ -28,5 +28,5 @@ model.compile(optimizer=Adam(lr = .00001), loss='binary_crossentropy', metrics=[
 model.fit(train_data, train_labels,
           nb_epoch=nb_epoch, batch_size=32,
           validation_data=(validation_data, validation_labels))
-          
+
 model.save_weights(top_model_weights_path)
