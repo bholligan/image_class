@@ -29,7 +29,7 @@ datagen = image.ImageDataGenerator(rescale=1./255)
 generator = datagen.flow_from_directory(
         validation_data_dir,
         target_size=(img_width, img_height),
-        batch_size=32,
+        batch_size=2,
         class_mode=None,
         shuffle=False)
 bottleneck_features_validation = base_model.predict_generator(generator, nb_validation_samples)
