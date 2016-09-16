@@ -9,8 +9,8 @@ train_data_dir = "/ebs/flickr/train"
 validation_data_dir = "/ebs/flickr/test"
 img_width, img_height = 299, 299
 nb_epoch = 30
-nb_train_samples = 9951
-nb_validation_samples = 4777
+nb_train_samples = 9939
+nb_validation_samples = 4767
 
 # create the base pre-trained model
 base_model = InceptionV3(weights='imagenet', include_top=False)
