@@ -5,10 +5,10 @@ from keras.layers import Dense, GlobalAveragePooling2D
 from keras import backend as K
 from keras.optimizers import SGD, RMSprop
 
-train_data_dir = "/ebs/categories/train"
-validation_data_dir = "/ebs/categories/test"
+train_data_dir = "/ebs/flickr/train"
+validation_data_dir = "/ebs/flickr/test"
 img_width, img_height = 299, 299
-nb_epoch = 25
+nb_epoch = 30
 nb_train_samples = 9951
 nb_validation_samples = 4777
 
