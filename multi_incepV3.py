@@ -28,7 +28,7 @@ model = Model(input=base_model.input, output=predictions)
 for layer in base_model.layers:
     layer.trainable = False
 
-model.compile(optimizer=SGD(lr = .00001), loss = 'categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=RMSprop(lr = .00001), loss = 'categorical_crossentropy', metrics=['accuracy'])
 
 train_datagen = image.ImageDataGenerator(rescale = 1./255,
                                   shear_range =.2,
