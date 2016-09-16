@@ -9,8 +9,8 @@ train_data_dir = "/ebs/flickr/train"
 validation_data_dir = "/ebs/flickr/test"
 img_width, img_height = 299, 299
 nb_epoch = 30
-nb_train_samples = 9939
-nb_validation_samples = 4767
+nb_train_samples = 9620
+nb_validation_samples = 4569
 
 # create the base pre-trained model
 base_model = InceptionV3(weights='imagenet', include_top=False)
@@ -20,7 +20,7 @@ x = base_model.output
 x = GlobalAveragePooling2D()(x)
 # add a fully-connected layer
 x = Dense(1024, activation='relu', name='fc_1')(x)
-predictions = Dense(13, activation='softmax')(x)
+predictions = Dense(11, activation='softmax')(x)
 
 model = Model(input=base_model.input, output=predictions)
 
