@@ -9,8 +9,8 @@ train_data_dir = "/ebs/flickr2/train"
 validation_data_dir = "/ebs/flickr2/test"
 img_width, img_height = 299, 299
 nb_epoch = 30
-nb_train_samples = 9611
-nb_validation_samples = 4561
+nb_train_samples = 10810
+nb_validation_samples = 4844
 
 # create the base pre-trained model
 base_model = InceptionV3(weights='imagenet', include_top=False)
@@ -57,7 +57,7 @@ model.fit_generator(generator_train,
             nb_val_samples = nb_validation_samples)
 
 #start fine-tuning
-# train the top 2 inception blocks
+# unfreeze the top 2 inception blocks
 for layer in model.layers[:172]:
    layer.trainable = False
 for layer in model.layers[172:]:
@@ -67,14 +67,14 @@ for layer in model.layers[172:]:
 model.compile(optimizer=SGD(lr=0.0001, momentum=0.9),
             loss='categorical_crossentropy', metrics=['accuracy'])
 
-# # we train our model again (this time fine-tuning the top 2 inception blocks
-# # alongside the top Dense layers
+# Train the top 2 inception blocks
 model.fit_generator(generator_train,
             samples_per_epoch = nb_train_samples,
             nb_epoch = nb_epoch,
             validation_data = generator_test,
             nb_val_samples = nb_validation_samples)
 
+# Save the model
 model_json = model.to_json()
 with open("incep_2_multi.json", 'w') as json_file:
     json_file.write(model_json)
