@@ -1,0 +1,154 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+    <section class="header">
+    <h1 class="title">Clothing Predictor</h1>
+    <p style="text-align:center"><img src = {{url_for('static', filename='divider.jpg')}}  height="20px"</img></p>
+    </section>
+
+    <div class="content">
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+          <div class="entry">
+            {{ form.entry.label }} {{ form.entry() }}
+          </div>
+        </div>
+      <div class="row">
+        <button type="submit" class="button-primary">Submit</button>
+      </div>
+    </form>
+    {% if im_count > 0 %}
+      <div class="row">
+        <div class="seven columns">
+          <h2>{{ variables['Image1']['msg'] }}</h2>
+          <img src= {{ variables['Image1']['url'] }}
+              height="299"
+          />
+        </div>
+        <div class="five columns">
+          <table class="u-full-width">
+            <thead>
+              <tr>
+                <th>Predictions</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ variables['Image1']['outfit1'] }}</td>
+                <td>{{ variables['Image1']['score1'] }}</td>
+              </tr>
+              <tr>
+                <td>{{ variables['Image1']['outfit2'] }}</td>
+                <td>{{ variables['Image1']['score2'] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      {% endif %}
+
+    {% if im_count > 1 %}
+    <div class="row">
+      <div class="seven columns">
+        <h2>{{ variables['Image2']['msg'] }}</h2>
+        <img src= {{ variables['Image2']['url'] }}
+            height="299"
+        />
+        </div>
+
+    <div class="five columns">
+      <table class="u-full-width" id = "other-score">
+        <tbody>
+          <tr>
+            <td>{{ variables['Image2']['outfit1'] }}</td>
+            <td>{{ variables['Image2']['score1'] }}</td>
+          </tr>
+          <tr>
+            <td>{{ variables['Image2']['outfit2'] }}</td>
+            <td>{{ variables['Image2']['score2'] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    {% endif %}
+
+    {% if im_count > 2 %}
+    <div class="row">
+      <div class="seven columns">
+        <h2>{{ variables['Image3']['msg'] }}</h2>
+        <img src= {{ variables['Image3']['url'] }}
+            height="299"
+        />
+        </div>
+        <div class="five columns">
+          <table class="u-full-width" id = "other-score">
+            <tbody>
+              <tr>
+                <td>{{ variables['Image3']['outfit1'] }}</td>
+                <td>{{ variables['Image3']['score1'] }}</td>
+              </tr>
+              <tr>
+                <td>{{ variables['Image3']['outfit2'] }}</td>
+                <td>{{ variables['Image3']['score2'] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+      {% endif %}
+
+    {% if im_count == -1 %}
+    <div class="row">
+      <div class="message">
+        <h2>{{ "Try a new url. Image filter determined this was not a single-subject image." }}</h2>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if im_count == -2 %}
+    <div class="row">
+      <div class="message">
+        <h2>{{ "You must be logged on to Instagram." }}</h2>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if im_count == -3 %}
+    <div class="row">
+      <div class="message">
+        <h2>{{ "Please enter a valid image url." }}</h2>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if im_count == -4 %}
+    <div class="row">
+      <div class="message">
+        <h2>{{ "That instagram handle does not exist." }}</h2>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if im_count == 0 %}
+    <div class="row">
+      <div class="message">
+        <h2>{{ "Try it!"}}</h2>
+        </div>
+    </div>
+    {% endif %}
+    </div>
+
+    <style>
+    </style>
+
+{% endblock body %}
+
+{% block js %}
+    <script>
+    </script>
+{% endblock js %}

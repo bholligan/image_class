@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Clothing PredictApp{% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <style>
+
+     body {
+       font-family: Verdana,Arial,sans-serif;
+     }
+
+     h2 {
+       font-size: 1.6em;
+       margin: 15px 0 5px 15px;
+       color: gray;
+     }
+
+     h1 {
+       font-size: 2em;
+       margin: 10px 0 0 0;
+       color: gray;
+       text-align: center;
+     }
+
+     table {
+       margin: 40px 0 0 0;
+     }
+
+     img {
+       max-width: 100%;
+     }
+     
+
+    </style>
+    {% block header %}{% endblock header %}
+  </head>
+    <body>
+      <div class="container">
+        {% block body %}{% endblock body %}
+      </div>
+      {% block js %}{% endblock js %}
+    </body>
+</html>
