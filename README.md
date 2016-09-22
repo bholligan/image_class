@@ -1,6 +1,6 @@
 # Clothing Predictor App
 
-The output of this project is a flask app that takes an Instagram handle or image URL, looks for images with one person in them, and then makes a prediction on what the person is wearing. Right now the model is trained on 13 different clothing categories.
+The output of this project is a flask app that takes an Instagram handle or image URL as input. It looks for images with one person in them, and then makes a prediction on what the person is wearing. Right now the model is trained on 13 different clothing categories.
 
 The purpose of this project was to take a first step towards building a robust image classification tool for fashion. It also gave me an opportunity to explore Keras and learn more about convolutional neural networks.
 
