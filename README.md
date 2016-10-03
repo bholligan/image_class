@@ -5,7 +5,7 @@ The output of this project is a flask app that takes an Instagram handle or imag
 The purpose of this project was to take a first step towards building a robust image classification tool for fashion. It also gave me an opportunity to explore Keras and learn more about convolutional neural networks.
 
 ### Approach
-Using Keras, I fine-tuned Google's Inception V3 in two different ways to build the app.  I trained a "filter model" to identify images with only one person in them. Right now I am only making one prediction per photo, so I wanted to make sure my app wasn't making a clothing prediction on inanimate objects or photos of a group of people.  
+Using Keras, I fine-tuned Google's Inception V3 in two different ways to build the app.  I trained a "filter model" to identify images with only one person in them. Right now I am only making one prediction per photo, so I wanted to make sure my app wasn't making a clothing prediction on inanimate objects or group photos.  
   
 The "clothing predictor model" is used to make the actual prediction on clothing type. 
 
