@@ -15,19 +15,19 @@ import re
 #---------- MODEL IN MEMORY ----------------#
 
 # CLASSIFIER MODEL
-with open('incep_2_multi.json', 'r') as f:
+with open('model_files/incep_2_multi.json', 'r') as f:
     model_json = f.read()
 model_json = model_json.replace('"gamma_regularizer": null, ', '').replace('"beta_regularizer": null, ', '')
 model = model_from_json(model_json)
-model.load_weights("incep_2_multi.h5")
+model.load_weights("model_files/incep_2_multi.h5")
 print("Successful model load.")
 
 # FILTER MODEL
-with open('incep_filter.json', 'r') as f:
+with open('model_files/incep_filter.json', 'r') as f:
     model_json2 = f.read()
 model_json2 = model_json2.replace('"gamma_regularizer": null, ', '').replace('"beta_regularizer": null, ', '')
 model2 = model_from_json(model_json2)
-model2.load_weights("incep_filter.h5")
+model2.load_weights("model_files/incep_filter.h5")
 
 def preprocess_img(img_path):
     img = image.load_img(img_path, target_size=(299, 299))
