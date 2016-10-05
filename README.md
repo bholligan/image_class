@@ -11,10 +11,16 @@ The "clothing predictor model" is used to make the actual prediction on clothing
 
 Both models converged to accuracy levels of 85-90% on validation image sets.
 
-### Presentation
-https://prezi.com/qco8gepbmsoa
+### Blog Post
+https://bholligan.github.io/projects/fashion_app/
+
+### App
+http://52.53.182.75/
 
 ### Data
 [**Fashion 10000**](https://www.researchgate.net/publication/262254329_Fashion_10000_An_enriched_social_image_dataset_for_fashion_and_clothing "Paper") - This dataset included roughly 32,000 Flickr photos with mechanical turk annotations. One of the questions asked of the annotators was "How many people are in this photo?". The answer to this question allowed me to split the dataset and train on single-subject images.
 
 **Flickr/Google Image Search** - The clothing predictor model was trained with roughly one thousand photos per category, hand picked from query results on Google and Flickr. I tried to select photos with rich and diverese backdrops, as this helped the model generalize better when predicting photos of people in natural settings. 
+
+### Presentation
+https://prezi.com/qco8gepbmsoa
